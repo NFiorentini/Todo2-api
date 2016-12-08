@@ -1,7 +1,9 @@
 const jwt                  = require('jsonwebtoken');
+
 const {ObjectID}           = require('mongodb');
 const {Todo}               = require('./../../models/todo');
 const {User}               = require('./../../models/user');
+
 const userOneId            = new ObjectID();
 const userTwoId            = new ObjectID();
 
@@ -39,6 +41,10 @@ const todos = [{
 
 const populateTodos = (done) => {
   Todo.remove({}).then(() => {
+
+/*
+The Mongoose insertMany() method takes the array of todos
+& inserts it into the collection. */
     return Todo.insertMany(todos);
   }).then(() => done());
 };
@@ -48,6 +54,9 @@ const populateUsers = (done) => {
     var userOne = new User(users[0]).save();
     var userTwo = new User(users[1]).save();
 
+/*
+Promise.all() waits for the items in the array to succeed
+before calling the callback. */
     return Promise.all([userOne, userTwo])
   }).then(() => done());
 };

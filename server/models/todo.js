@@ -1,33 +1,39 @@
-const mongoose                        = require('mongoose');
+const mongoose          = require('mongoose');
 
-
-// mongoose.model() takes two args:
-// a String name & an object.
+/*
+mongoose.model() takes two args:
+a String name & an object. */
 const Todo = mongoose.model('Todo', {
   text: {
 
-    // The Text field is a String. Beware that Mongoose
-    // WILL cast a Number or a Boolean into a String,
-    // e.g., text: true -> "true".
+/*
+The text field is a String. Beware that Mongoose WILL
+cast a Number or a Boolean into a String, e.g.,
+text: true -> "true". */
     type: String,
 
-    // The Text value MUST exist.
+/*
+The text value MUST exist. */
     required: true,
 
-    // No empty strings.
+/*
+No empty strings. */
     minlength: 1,
 
-    // Remove leading & trailing whitespace from
-    // the Text field's value.
+/*
+Remove leading & trailing whitespace from the text
+field's value. */
     trim: true
   },
   completed: {
 
-    // The Completed field is a Boolean.
+/*
+The completed field is a Boolean. */
     type: Boolean,
 
-    // Rather than requiring the Completed field, it
-    // has a default value of false.
+/*
+Rather than requiring the completed field, it has a
+default value of false. */
     default: false
   },
   completedAt: {
@@ -40,6 +46,6 @@ const Todo = mongoose.model('Todo', {
   }
 });
 
-
-// Export so we can use the Todo model elsewhere.
+/*
+Export so we can use the Todo model elsewhere. */
 module.exports = {Todo};
